@@ -25,7 +25,8 @@ RUN echo "PassEnv DB_SERVICE_SERVICE_HOST" >> /etc/httpd/conf/httpd.conf
 RUN chown root:apache /var/www/cgi-bin/action
 RUN chmod 755 /var/www/cgi-bin/action
 RUN echo "The Web Server is Running" > /var/www/html/index.html
-EXPOSE 80
+RUN sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf
+EXPOSE 8080
 
 # Start the service
 CMD ["-D", "FOREGROUND"]
