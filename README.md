@@ -1,2 +1,2 @@
-# openshift
-openshift stuff
+# Openshift
+Openshift stuff
