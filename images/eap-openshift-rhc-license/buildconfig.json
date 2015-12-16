@@ -1,0 +1,64 @@
+        {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "eap-openshift-rhc-license",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "eap-openshift-rhc-license"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "triggers": [
+                    {
+                        "type": "GitHub",
+                        "github": {
+                            "secret": "iC-pBJfFTSzGo_aeLtHZ"
+                        }
+                    },
+                    {
+                        "type": "Generic",
+                        "generic": {
+                            "secret": "W67YRpXUVqwyZ-hED2g-"
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChange": {}
+                    }
+                ],
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "https://github.com/jnordell/openshift.git",
+                        "ref": "master"
+                    }
+                },
+                "strategy": {
+                    "type": "Docker",
+                    "dockerStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "eap-openshift:6.4"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "eap-openshift-rhc-license:latest"
+                    }
+                },
+                "resources": {}
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        },
+
