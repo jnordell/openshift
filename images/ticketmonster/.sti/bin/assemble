@@ -4,4 +4,4 @@
 curl -o $JBOSS_HOME/standalone/deployments/ROOT.war -O -L https://github.com/jnordell/openshift/raw/master/images/ticketmonster/ticket-monster.war
 
 # Call default assemble script
-/usr/local/sti/assemble
+/usr/local/s2i/assemble
