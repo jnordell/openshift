@@ -4,7 +4,7 @@
 
 # Pull the rhel image from the local repository
 FROM rhel7:latest
-#USER root
+USER user
 
 MAINTAINER jnordell
 
@@ -20,13 +20,18 @@ RUN yum update -y
 RUN yum install httpd procps-ng MySQL-python -y
 
 # Add configuration file
-ADD action /var/www/cgi-bin/action
-RUN echo "PassEnv DB_SERVICE_SERVICE_HOST" >> /etc/httpd/conf/httpd.conf
-RUN chown root:apache /var/www/cgi-bin/action
-RUN chmod 755 /var/www/cgi-bin/action
-RUN echo "The Web Server is Running" > /var/www/html/index.html
+#ADD action /var/www/cgi-bin/action
+#RUN echo "PassEnv DB_SERVICE_SERVICE_HOST" >> /etc/httpd/conf/httpd.conf
+#RUN chown root:apache /var/www/cgi-bin/action
+#RUN chmod 755 /var/www/cgi-bin/action
+RUN mkdir -p /www/logs 
+RUN mkdir -p /www/html
+RUN chown -R apache:apache /www
+RUN echo "The Web Server is Running" > /www/html/index.html
+RUN sed -i '/ServerRoot/s_"/etc/httpd"_"/www/html"_' /etc/httpd/conf/httpd.conf
+RUN sed -i 's/DocumentRoot "/var/www/html"/DocumentRoot "/www/html"' /etc/httpd/conf/httpd.conf
+RUN echo "PidFile /www/httpd.pid" >> /etc/httpd/conf/httpd.conf
 RUN sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf
-RUN echo "PidFile /tmp/httpd.pid" >> /etc/httpd/conf/httpd.conf
 EXPOSE 8080
 
 # Start the service
