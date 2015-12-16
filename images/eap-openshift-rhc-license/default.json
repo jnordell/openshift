@@ -33,6 +33,28 @@
             }
         },
         {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "jboss-eap64-openshift",
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "eap-openshift-rhc"
+                },
+                "annotations": {
+                    "openshift.io/generated-by": "OpenShiftNewApp",
+                    "openshift.io/image.dockerRepositoryCheck": "2015-12-16T21:20:38Z"
+                }
+            },
+            "spec": {
+                "dockerImageRepository": "registry.access.redhat.com/jboss-eap-6/jboss-eap64-openshift"
+            },
+            "status": {
+                "dockerImageRepository": ""
+            }
+        },
+
+        {
             "kind": "BuildConfig",
             "apiVersion": "v1",
             "metadata": {
@@ -79,7 +101,7 @@
                     "dockerStrategy": {
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "eap64-openshift:1.1"
+                            "name": "jboss-eap64-openshift:1.1"
                         }
                     }
                 },
