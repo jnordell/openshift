@@ -4,7 +4,7 @@
 
 # Pull the rhel image from the local repository
 FROM rhel7:latest
-USER root
+#USER root
 
 MAINTAINER jnordell
 
